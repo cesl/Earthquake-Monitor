@@ -15,6 +15,7 @@
 		D68694621B38F0F100FF0B73 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D68694611B38F0F100FF0B73 /* Images.xcassets */; };
 		D68694651B38F0F100FF0B73 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D68694631B38F0F100FF0B73 /* LaunchScreen.xib */; };
 		D68694711B38F0F100FF0B73 /* Earthquake_MonitorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D68694701B38F0F100FF0B73 /* Earthquake_MonitorTests.m */; };
+		D686947C1B38F27600FF0B73 /* sumaryReader.m in Sources */ = {isa = PBXBuildFile; fileRef = D686947B1B38F27600FF0B73 /* sumaryReader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,8 @@
 		D686946A1B38F0F100FF0B73 /* Earthquake MonitorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Earthquake MonitorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D686946F1B38F0F100FF0B73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D68694701B38F0F100FF0B73 /* Earthquake_MonitorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Earthquake_MonitorTests.m; sourceTree = "<group>"; };
+		D686947A1B38F27600FF0B73 /* sumaryReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sumaryReader.h; path = classes/sumaryReader.h; sourceTree = "<group>"; };
+		D686947B1B38F27600FF0B73 /* sumaryReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = sumaryReader.m; path = classes/sumaryReader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,7 @@
 				D68694551B38F0F100FF0B73 /* AppDelegate.h */,
 				D68694561B38F0F100FF0B73 /* AppDelegate.m */,
 				D686945B1B38F0F100FF0B73 /* ViewController.h */,
+				D686947E1B38F29700FF0B73 /* myClasses */,
 				D686945C1B38F0F100FF0B73 /* ViewController.m */,
 				D686945E1B38F0F100FF0B73 /* Main.storyboard */,
 				D68694611B38F0F100FF0B73 /* Images.xcassets */,
@@ -120,6 +124,15 @@
 				D686946F1B38F0F100FF0B73 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D686947E1B38F29700FF0B73 /* myClasses */ = {
+			isa = PBXGroup;
+			children = (
+				D686947A1B38F27600FF0B73 /* sumaryReader.h */,
+				D686947B1B38F27600FF0B73 /* sumaryReader.m */,
+			);
+			name = myClasses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,6 +237,7 @@
 			files = (
 				D68694571B38F0F100FF0B73 /* AppDelegate.m in Sources */,
 				D686945A1B38F0F100FF0B73 /* Earthquake_Monitor.xcdatamodeld in Sources */,
+				D686947C1B38F27600FF0B73 /* sumaryReader.m in Sources */,
 				D686945D1B38F0F100FF0B73 /* ViewController.m in Sources */,
 				D68694541B38F0F100FF0B73 /* main.m in Sources */,
 			);

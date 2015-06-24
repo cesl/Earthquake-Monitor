@@ -12,6 +12,7 @@
 
 
 + (NSDictionary *) getSumaryFeedfrom:(NSString*)url;
++ (NSDictionary *) getDetailFeedfrom:(NSString*)url;
 
 @end
 

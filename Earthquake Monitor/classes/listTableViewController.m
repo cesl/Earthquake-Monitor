@@ -9,6 +9,7 @@
 #import "listTableViewController.h"
 #import "sumaryReader.h"
 #import "detailViewController.h"
+#import "Reachability.h"
 
 @interface listTableViewController (){
     NSArray * feedData;
@@ -32,32 +33,62 @@
     
     self.refreshControl = refreshControl;
     
-     colors = [NSArray arrayWithObjects:[UIColor greenColor], [UIColor yellowColor], [UIColor purpleColor], [UIColor blueColor],    [UIColor orangeColor], [UIColor darkGrayColor],  [UIColor blackColor], [UIColor brownColor], [UIColor redColor], [UIColor colorWithRed:185 green:7 blue:7 alpha:1], nil];
+     colors = [NSArray arrayWithObjects:[UIColor greenColor], [UIColor yellowColor], [UIColor blueColor], [UIColor purpleColor],    [UIColor orangeColor], [UIColor darkGrayColor],  [UIColor blackColor], [UIColor brownColor], [UIColor redColor], [UIColor colorWithRed:185 green:7 blue:7 alpha:1], nil];
     
     [self loadSumary];
+    
 }
 - (IBAction)refreshBtn:(id)sender {
     [self loadSumary];
 }
 
 -(void) loadSumary{
-    
     [self.refreshControl beginRefreshing];
-    
-    dispatch_queue_t loaderQ = dispatch_queue_create("load detail", NULL);
-    dispatch_async(loaderQ, ^{
-        NSDictionary* data = [sumaryReader getSumaryFeedfrom:@"http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"];
+    if ([self connected]) {
+        NSLog(@"connected");
         
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_queue_t loaderQ = dispatch_queue_create("load detail", NULL);
+        dispatch_async(loaderQ, ^{
+            NSDictionary* data = [sumaryReader getSumaryFeedfrom:@"http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"];
             
-            self.title = [[data objectForKey:@"metadata"] objectForKey:@"title"];
-            feedData = [data objectForKey:@"features"];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                self.title = [[data objectForKey:@"metadata"] objectForKey:@"title"];
+                feedData = [data objectForKey:@"features"];
+                [self.refreshControl endRefreshing];
+                [self.tableView reloadData];
+                
+            });
+        });
+        
+    }else if ([[NSUserDefaults standardUserDefaults] objectForKey:@"sumaryFeed"] != nil ) {
+            
+            NSLog(@"smaryFeed = %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"sumaryFeed"] );
+            
+            NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"sumaryFeed"];
+            NSDictionary *temp = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            //NSDictionary * temp  = [[NSDictionary alloc] initWithDictionary:retrievedDictionary];
+            
+            
+            
+            
+            
+            self.title = [[temp objectForKey:@"metadata"] objectForKey:@"title"];
+            feedData = [temp objectForKey:@"features"];
+            
             [self.refreshControl endRefreshing];
             [self.tableView reloadData];
-
-            
-        });
-    });
+    }else{
+        
+        [self.refreshControl endRefreshing];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:@"Please check your internet connection."
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -144,5 +175,13 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma MARK connectivity
+- (BOOL)connected
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return !(networkStatus == NotReachable);
+}
 
 @end

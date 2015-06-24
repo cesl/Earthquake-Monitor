@@ -11,7 +11,7 @@
 @interface sumaryReader : NSObject
 
 
++ (NSDictionary *) getSumaryFeedfrom:(NSString*)url;
 
-+ (NSDictionary *) getSumaryFeed;
 @end
 

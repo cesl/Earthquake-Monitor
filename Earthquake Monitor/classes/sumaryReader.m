@@ -11,12 +11,10 @@
 @implementation sumaryReader
 
 
++ (NSDictionary *) getSumaryFeedfrom:(NSString*)url{
 
-+ (NSDictionary *) getSumaryFeed{
-   
-    NSString * urlString = @"http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson";
     
-    urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString * urlString = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     NSData * jsonData = [[NSString stringWithContentsOfURL:[NSURL URLWithString:urlString] encoding:NSUTF8StringEncoding error:nil] dataUsingEncoding:NSUTF8StringEncoding];
     
@@ -34,5 +32,7 @@
     return results;
     
 }
+
+
 
 @end

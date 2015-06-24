@@ -7,21 +7,57 @@
 //
 
 #import "listTableViewController.h"
+#import "sumaryReader.h"
+#import "detailViewController.h"
 
-@interface listTableViewController ()
-
+@interface listTableViewController (){
+    NSArray * feedData;
+    NSArray * colors;
+}
+    
 @end
 
 @implementation listTableViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    
+    [refreshControl addTarget:self
+                       action:@selector(loadSumary)
+             forControlEvents:UIControlEventValueChanged];
+    
+    self.refreshControl = refreshControl;
+    
+     colors = [NSArray arrayWithObjects:[UIColor greenColor], [UIColor yellowColor], [UIColor purpleColor], [UIColor blueColor],    [UIColor orangeColor], [UIColor darkGrayColor],  [UIColor blackColor], [UIColor brownColor], [UIColor redColor], [UIColor colorWithRed:185 green:7 blue:7 alpha:1], nil];
+    
+    [self loadSumary];
+}
+- (IBAction)refreshBtn:(id)sender {
+    [self loadSumary];
+}
+
+-(void) loadSumary{
+    
+    [self.refreshControl beginRefreshing];
+    
+    dispatch_queue_t loaderQ = dispatch_queue_create("load detail", NULL);
+    dispatch_async(loaderQ, ^{
+        NSDictionary* data = [sumaryReader getSumaryFeedfrom:@"http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            self.title = [[data objectForKey:@"metadata"] objectForKey:@"title"];
+            feedData = [data objectForKey:@"features"];
+            [self.refreshControl endRefreshing];
+            [self.tableView reloadData];
+
+            
+        });
+    });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,26 +68,38 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return feedData? feedData.count: 0;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"listCell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    
+    cell.textLabel.text = [[feedData[indexPath.row][@"properties"] objectForKey:@"mag"] description];
+    
+    cell.textLabel.textColor = colors[[[feedData[indexPath.row][@"properties"] objectForKey:@"mag"] integerValue]];
+    
+    cell.detailTextLabel.text = [[feedData[indexPath.row][@"properties"] objectForKey:@"place"] description];
     
     return cell;
 }
-*/
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    detailViewController * detail = [self.storyboard instantiateViewControllerWithIdentifier:@"detailVC"];
+    
+    detail.titulo = [[feedData[indexPath.row][@"properties"] objectForKey:@"title"] description];
+    detail.detailUrl = [[feedData[indexPath.row][@"properties"] objectForKey:@"detail"] description];
+    
+    [self.navigationController pushViewController:detail animated:YES];
+}
+
 
 /*
 // Override to support conditional editing of the table view.

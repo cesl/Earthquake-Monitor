@@ -17,6 +17,9 @@
 		D68694711B38F0F100FF0B73 /* Earthquake_MonitorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D68694701B38F0F100FF0B73 /* Earthquake_MonitorTests.m */; };
 		D686947C1B38F27600FF0B73 /* sumaryReader.m in Sources */ = {isa = PBXBuildFile; fileRef = D686947B1B38F27600FF0B73 /* sumaryReader.m */; };
 		D68694811B38F83100FF0B73 /* listTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D68694801B38F83100FF0B73 /* listTableViewController.m */; };
+		D68694841B39174B00FF0B73 /* detailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D68694831B39174B00FF0B73 /* detailViewController.m */; };
+		D68694861B3925BC00FF0B73 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68694851B3925BB00FF0B73 /* MapKit.framework */; };
+		D68694891B392B5000FF0B73 /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D68694881B392B5000FF0B73 /* MyAnnotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,11 @@
 		D686947B1B38F27600FF0B73 /* sumaryReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = sumaryReader.m; path = classes/sumaryReader.m; sourceTree = "<group>"; };
 		D686947F1B38F83100FF0B73 /* listTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = listTableViewController.h; path = classes/listTableViewController.h; sourceTree = "<group>"; };
 		D68694801B38F83100FF0B73 /* listTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = listTableViewController.m; path = classes/listTableViewController.m; sourceTree = "<group>"; };
+		D68694821B39174B00FF0B73 /* detailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = detailViewController.h; path = classes/detailViewController.h; sourceTree = "<group>"; };
+		D68694831B39174B00FF0B73 /* detailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = detailViewController.m; path = classes/detailViewController.m; sourceTree = "<group>"; };
+		D68694851B3925BB00FF0B73 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		D68694871B392B5000FF0B73 /* MyAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnnotation.h; sourceTree = "<group>"; };
+		D68694881B392B5000FF0B73 /* MyAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D68694861B3925BC00FF0B73 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +80,7 @@
 		D68694451B38F0F100FF0B73 = {
 			isa = PBXGroup;
 			children = (
+				D68694851B3925BB00FF0B73 /* MapKit.framework */,
 				D68694501B38F0F100FF0B73 /* Earthquake Monitor */,
 				D686946D1B38F0F100FF0B73 /* Earthquake MonitorTests */,
 				D686944F1B38F0F100FF0B73 /* Products */,
@@ -134,6 +144,10 @@
 			children = (
 				D686947F1B38F83100FF0B73 /* listTableViewController.h */,
 				D68694801B38F83100FF0B73 /* listTableViewController.m */,
+				D68694821B39174B00FF0B73 /* detailViewController.h */,
+				D68694831B39174B00FF0B73 /* detailViewController.m */,
+				D68694871B392B5000FF0B73 /* MyAnnotation.h */,
+				D68694881B392B5000FF0B73 /* MyAnnotation.m */,
 				D686947A1B38F27600FF0B73 /* sumaryReader.h */,
 				D686947B1B38F27600FF0B73 /* sumaryReader.m */,
 			);
@@ -242,7 +256,9 @@
 			files = (
 				D68694571B38F0F100FF0B73 /* AppDelegate.m in Sources */,
 				D68694811B38F83100FF0B73 /* listTableViewController.m in Sources */,
+				D68694891B392B5000FF0B73 /* MyAnnotation.m in Sources */,
 				D686945A1B38F0F100FF0B73 /* Earthquake_Monitor.xcdatamodeld in Sources */,
+				D68694841B39174B00FF0B73 /* detailViewController.m in Sources */,
 				D686947C1B38F27600FF0B73 /* sumaryReader.m in Sources */,
 				D686945D1B38F0F100FF0B73 /* ViewController.m in Sources */,
 				D68694541B38F0F100FF0B73 /* main.m in Sources */,
@@ -436,6 +452,7 @@
 				D68694761B38F0F100FF0B73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D68694771B38F0F100FF0B73 /* Build configuration list for PBXNativeTarget "Earthquake MonitorTests" */ = {
 			isa = XCConfigurationList;
@@ -444,6 +461,7 @@
 				D68694791B38F0F100FF0B73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
